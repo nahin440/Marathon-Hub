@@ -63,7 +63,7 @@ const Register = () => {
 
     return (
         <div
-            className="min-h-screen bg-[#fffefa] flex items-center justify-center px-4"
+            className="min-h-screen bg-[#FBF8EF] flex items-center justify-center px-4"
             data-aos="fade-up"
         >
             <Toaster position="top-center" reverseOrder={false} />
@@ -86,8 +86,7 @@ const Register = () => {
                             type="text"
                             name="name"
                             id="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
+                            
                             className="input input-bordered w-full"
                             required
                         />
@@ -102,8 +101,7 @@ const Register = () => {
                             type="email"
                             name="email"
                             id="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
+                            
                             className="input input-bordered w-full"
                             required
                         />
@@ -118,8 +116,7 @@ const Register = () => {
                             type="url"
                             name="photoURL"
                             id="photoURL"
-                            value={formData.photoURL}
-                            onChange={handleInputChange}
+                            
                             className="input input-bordered w-full"
                         />
                     </div>
@@ -133,8 +130,7 @@ const Register = () => {
                             type="password"
                             name="password"
                             id="password"
-                            value={formData.password}
-                            onChange={handleInputChange}
+                            
                             className="input input-bordered w-full"
                             required
                         />
