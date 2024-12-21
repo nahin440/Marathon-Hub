@@ -63,7 +63,7 @@ const Register = () => {
 
     return (
         <div
-            className="min-h-screen bg-[#FBF8EF] flex items-center justify-center px-4"
+            className="min-h-screen bg-[#fffefa] flex items-center justify-center px-4"
             data-aos="fade-up"
         >
             <Toaster position="top-center" reverseOrder={false} />

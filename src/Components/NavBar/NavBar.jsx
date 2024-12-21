@@ -5,15 +5,15 @@ import { FaBars, FaTimes, FaUserCircle } from 'react-icons/fa';
 const NavBar = ({ isLoggedIn }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-   
+
 
     return (
-        <div className="navbar bg-[#FBF8EF] text-[#F96E2A] shadow-lg">
+        <div className="navbar bg-[#fff8e4] text-[#F96E2A] shadow-lg">
             {/* Navbar Start */}
             <div className="navbar-start">
                 <button
                     className="btn btn-ghost md:hidden"
-                    onClick={()=>setIsMenuOpen(!isMenuOpen)}
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                     {isMenuOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
                 </button>
@@ -50,11 +50,11 @@ const NavBar = ({ isLoggedIn }) => {
                 ) : (
                     <div className='hidden md:block ' >
                         <div className="flex items-center space-x-4">
-                        <FaUserCircle className="text-2xl" />
-                        <button className="btn btn-outline border-[#F96E2A] text-[#F96E2A]">
-                            Logout
-                        </button>
-                    </div>
+                            <FaUserCircle className="text-2xl" />
+                            <button className="btn btn-outline border-[#F96E2A] text-[#F96E2A]">
+                                Logout
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
@@ -65,7 +65,7 @@ const NavBar = ({ isLoggedIn }) => {
                     <div className="fixed top-0 left-0 w-3/4 h-full bg-[#FBF8EF] shadow-lg z-50">
                         <button
                             className="absolute top-4 right-4 btn btn-ghost"
-                            onClick={()=>setIsMenuOpen(!isMenuOpen)}
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
                         >
                             <FaTimes className="text-2xl text-[#F96E2A]" />
                         </button>
@@ -77,7 +77,7 @@ const NavBar = ({ isLoggedIn }) => {
                             </li>
                             {isLoggedIn && (
                                 <li>
-                                    <Link to="/dashboard" className= " bg-orange-100 font-bold rounded-none text-[#F96E2A]" >
+                                    <Link to="/dashboard" className=" bg-orange-100 font-bold rounded-none text-[#F96E2A]" >
                                         Dashboard
                                     </Link>
                                 </li>
@@ -85,7 +85,7 @@ const NavBar = ({ isLoggedIn }) => {
                             {!isLoggedIn && (
                                 <>
                                     <li>
-                                        <Link to="/login" className= " bg-orange-100 font-bold rounded-none text-[#F96E2A]" >
+                                        <Link to="/login" className=" bg-orange-100 font-bold rounded-none text-[#F96E2A]" >
                                             Login
                                         </Link>
                                     </li>

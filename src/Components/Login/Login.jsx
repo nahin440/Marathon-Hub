@@ -1,85 +1,97 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth } from '../firebase'; // Make sure to set up Firebase and export 'auth'
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // Dummy users for email/password matching
+  const registeredUsers = [
+    { email: 'user@example.com', password: 'password123' }
+  ];
+
   // Handle login with email and password
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
+    
+    // Check if email and password match a registered user
+    const user = registeredUsers.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (user) {
       navigate('/dashboard'); // Redirect to the dashboard or home page
-    } catch (error) {
+    } else {
       toast.error('Invalid email or password!');
     }
   };
 
-  // Handle Google login
-  const handleGoogleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      navigate('/dashboard'); // Redirect to the dashboard
-    } catch (error) {
-      toast.error('Google login failed!');
-    }
-  };
-
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="w-full max-w-sm p-6 bg-white shadow-lg rounded-md">
-        <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
+    <div
+      className="min-h-screen bg-[#fffefa] flex items-center justify-center px-4"
+    >
+      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h2 className="text-2xl font-bold text-center text-[#F96E2A] mb-6">
+          Login
+        </h2>
         <form onSubmit={handleLogin}>
+          {/* Email */}
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-[#F96E2A]">
+              Email
+            </label>
             <input
               type="email"
               id="email"
-              className="w-full mt-2 p-2 border rounded-md"
+              className="input input-bordered w-full"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
 
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+          {/* Password */}
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-sm font-medium text-[#F96E2A]">
+              Password
+            </label>
             <input
               type="password"
               id="password"
-              className="w-full mt-2 p-2 border rounded-md"
+              className="input input-bordered w-full"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
 
-          <button type="submit" className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="btn w-full bg-[#F96E2A] text-white border-none hover:bg-orange-600"
+          >
             Login
           </button>
         </form>
 
-        <div className="mt-4 flex justify-between items-center">
-          <button
-            onClick={handleGoogleLogin}
-            className="w-full py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-          >
-            Login with Google
-          </button>
-        </div>
+        {/* Redirect to Register */}
+        <p className="text-center mt-4 text-sm">
+          Don't have an account?{' '}
+          <a href="/register" className="text-[#F96E2A] hover:underline">
+            Register here
+          </a>
+        </p>
 
-        <div className="mt-4 text-center">
-          <p className="text-sm">
-            Don't have an account?{' '}
-            <a href="/register" className="text-blue-600 hover:underline">Register here</a>
-          </p>
-        </div>
+        {/* Google Login */}
+        <div className="divider my-4">OR</div>
+        <button
+          onClick={() => toast.success('Google login clicked!')}
+          className="btn btn-outline w-full flex items-center justify-center border-[#F96E2A] text-[#F96E2A] hover:bg-[#F96E2A] hover:text-white"
+        >
+          Continue with Google
+        </button>
       </div>
     </div>
   );
