@@ -48,11 +48,13 @@ const NavBar = ({ isLoggedIn }) => {
                         </Link>
                     </div>
                 ) : (
-                    <div className="flex items-center hidden md:block space-x-4">
+                    <div className='hidden md:block ' >
+                        <div className="flex items-center space-x-4">
                         <FaUserCircle className="text-2xl" />
                         <button className="btn btn-outline border-[#F96E2A] text-[#F96E2A]">
                             Logout
                         </button>
+                    </div>
                     </div>
                 )}
             </div>

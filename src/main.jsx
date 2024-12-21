@@ -13,6 +13,7 @@ import Home from './Components/Home/Home';
 import Marathons from './Components/Marathons/Marathons';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Register from './Components/Register/Register';
+import Login from './Components/Login/Login';
 
 
 const router = createBrowserRouter([
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <Register></Register>,
+        element: <Login></Login>,
       },
     ],
   },
