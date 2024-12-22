@@ -55,7 +55,7 @@ const NavBar = () => {
                         <img
                             src={user.photoURL || 'https://via.placeholder.com/150'}
                             alt="User Avatar"
-                            className="w-10 h-10 rounded-full border-2 border-[#F96E2A]"
+                            className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
                         />
                         <button
                             onClick={handleLogOut}
