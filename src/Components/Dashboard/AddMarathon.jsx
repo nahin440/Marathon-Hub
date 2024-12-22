@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Import the CSS for date picker
+import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 
 const AddMarathon = () => {
   const [marathonDetails, setMarathonDetails] = useState({
@@ -11,7 +12,7 @@ const AddMarathon = () => {
     location: '',
     runningDistance: '',
     description: '',
-    marathonImage: '',
+    marathonImage: null,
     createdAt: new Date(),
     totalRegistrationCount: 0,
   });
@@ -31,10 +32,46 @@ const AddMarathon = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    setMarathonDetails({
+      ...marathonDetails,
+      marathonImage: e.target.files[0],
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic (e.g., send data to backend)
-    console.log('Marathon Created:', marathonDetails);
+
+    const formData = new FormData();
+    for (const key in marathonDetails) {
+      formData.append(key, marathonDetails[key]);
+    }
+
+    try {
+      const response = await axios.post('http://localhost:3000/marathons', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      if (response.data.insertedId) {
+        alert('Marathon successfully created!');
+        setMarathonDetails({
+          title: '',
+          startRegistrationDate: new Date(),
+          endRegistrationDate: new Date(),
+          marathonStartDate: new Date(),
+          location: '',
+          runningDistance: '',
+          description: '',
+          marathonImage: null,
+          createdAt: new Date(),
+          totalRegistrationCount: 0,
+        });
+      }
+    } catch (error) {
+      console.error('Error creating marathon:', error);
+      alert('An error occurred while creating the marathon.');
+    }
   };
 
   return (
@@ -151,7 +188,7 @@ const AddMarathon = () => {
             type="file"
             id="marathonImage"
             name="marathonImage"
-            onChange={handleChange}
+            onChange={handleFileChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
           />
         </div>

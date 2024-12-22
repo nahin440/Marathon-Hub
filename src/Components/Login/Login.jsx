@@ -11,7 +11,7 @@ const Login = () => {
   const location = useLocation();
 
   // Redirect user to intended page after login
-  const from = location.state?.from?.pathname || '/';
+  // const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     // Any additional effect (e.g., animations or focus handling)
@@ -37,7 +37,7 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         Swal.fire('Success', 'Logged in successfully!', 'success');
-        navigate(from, { replace: true });
+        navigate(location?.state ? location.state : '/');
       })
       .catch((error) => {
         Swal.fire('Error', error.message, 'error');
@@ -48,7 +48,7 @@ const Login = () => {
     googleSignIn()
       .then((result) => {
         Swal.fire('Success', 'Logged in with Google!', 'success');
-        navigate(from, { replace: true });
+        navigate(location?.state ? location.state : '/');
       })
       .catch((error) => {
         Swal.fire('Error', error.message, 'error');

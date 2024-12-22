@@ -18,6 +18,9 @@ import AuthProvider from './AuthProvider/AuthProvider';
 import AddMarathon from './Components/Dashboard/AddMarathon';
 import MyMarathons from './Components/Dashboard/MyMarathons';
 import MyApply from './Components/Dashboard/MyApply';
+import MarathonDetailsPage from './Components/MarathonDetailsPage/MarathonDetailsPage';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import RegistrationForm from './Components/RegistrationForm/RegistrationForm';
 
 
 const router = createBrowserRouter([
@@ -57,6 +60,16 @@ const router = createBrowserRouter([
       {
         path: "dashboard/my-apply-list",
         element: <MyApply></MyApply>,
+      },
+      {
+        path: "marathons/:id",
+        element: <PrivateRoute> <MarathonDetailsPage></MarathonDetailsPage>  </PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:3000/marathons/${params.id}`),
+      },
+      {
+        path: "marathonRegister/:id",
+        element: <PrivateRoute> <RegistrationForm></RegistrationForm> </PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:3000/marathons/${params.id}`),
       },
     ],
   },
