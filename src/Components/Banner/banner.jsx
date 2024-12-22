@@ -5,8 +5,8 @@ import img3 from '../../assets/marathon-banner/6665.jpg';
 
 const Banner = () => {
     return (
-        <div className="w-full bg-[#fff8e4]  py-8 mb-16 mt-2">
-            <div className="container mx-auto px-4">
+        <div className="w-full bg-[#fff8e4]   mb-16 mt-8">
+            <div className="container w-full mx-auto ">
                 {/* DaisyUI Carousel */}
                 <div className="carousel w-full rounded-lg">
                     {/* Slide 1 */}

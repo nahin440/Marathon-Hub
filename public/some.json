@@ -1,0 +1,123 @@
+[
+    {
+      "marathonTitle": "New York City Marathon",
+      "startRegistrationDate": "2024-06-01",
+      "endRegistrationDate": "2024-10-01",
+      "marathonStartDate": "2024-11-03",
+      "location": "New York, USA",
+      "runningDistance": "42.195k",
+      "description": "The New York City Marathon is one of the largest and most prestigious marathons in the world, attracting athletes from all over the globe.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-01",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "Boston Marathon",
+      "startRegistrationDate": "2024-07-01",
+      "endRegistrationDate": "2024-10-15",
+      "marathonStartDate": "2024-04-15",
+      "location": "Boston, USA",
+      "runningDistance": "42.195k",
+      "description": "The Boston Marathon is the oldest annual marathon in the world, known for its challenging course and rich history.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-02",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "London Marathon",
+      "startRegistrationDate": "2024-08-01",
+      "endRegistrationDate": "2024-12-01",
+      "marathonStartDate": "2024-04-26",
+      "location": "London, UK",
+      "runningDistance": "42.195k",
+      "description": "One of the largest marathons in the world, the London Marathon attracts elite athletes as well as thousands of charity runners.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-03",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "Tokyo Marathon",
+      "startRegistrationDate": "2024-09-01",
+      "endRegistrationDate": "2024-12-15",
+      "marathonStartDate": "2024-03-01",
+      "location": "Tokyo, Japan",
+      "runningDistance": "42.195k",
+      "description": "The Tokyo Marathon is known for its smooth course and incredible crowd support.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-04",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "Berlin Marathon",
+      "startRegistrationDate": "2024-07-15",
+      "endRegistrationDate": "2024-09-15",
+      "marathonStartDate": "2024-09-29",
+      "location": "Berlin, Germany",
+      "runningDistance": "42.195k",
+      "description": "Known for its fast course, the Berlin Marathon is a favorite for runners looking to set world records.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-05",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "Chicago Marathon",
+      "startRegistrationDate": "2024-08-01",
+      "endRegistrationDate": "2024-10-01",
+      "marathonStartDate": "2024-10-13",
+      "location": "Chicago, USA",
+      "runningDistance": "42.195k",
+      "description": "One of the six World Marathon Majors, the Chicago Marathon features a flat, fast course through the city.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-06",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "Paris Marathon",
+      "startRegistrationDate": "2024-05-01",
+      "endRegistrationDate": "2024-08-01",
+      "marathonStartDate": "2024-04-07",
+      "location": "Paris, France",
+      "runningDistance": "42.195k",
+      "description": "The Paris Marathon is one of the most scenic marathons, taking runners through the heart of Paris.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-07",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "Sydney Marathon",
+      "startRegistrationDate": "2024-06-01",
+      "endRegistrationDate": "2024-08-01",
+      "marathonStartDate": "2024-09-15",
+      "location": "Sydney, Australia",
+      "runningDistance": "42.195k",
+      "description": "The Sydney Marathon offers a scenic course along Sydney's stunning coastline.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-08",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "Amsterdam Marathon",
+      "startRegistrationDate": "2024-08-01",
+      "endRegistrationDate": "2024-10-01",
+      "marathonStartDate": "2024-10-20",
+      "location": "Amsterdam, Netherlands",
+      "runningDistance": "42.195k",
+      "description": "The Amsterdam Marathon offers a fast and flat course through the beautiful city and its parks.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-09",
+      "totalRegistrationCount": 0
+    },
+    {
+      "marathonTitle": "Rio de Janeiro Marathon",
+      "startRegistrationDate": "2024-06-01",
+      "endRegistrationDate": "2024-08-15",
+      "marathonStartDate": "2024-07-28",
+      "location": "Rio de Janeiro, Brazil",
+      "runningDistance": "42.195k",
+      "description": "The Rio Marathon features stunning views of the city's beaches and mountains.",
+      "marathonImage": "https://orchiddigitals.com/wp-content/uploads/2023/03/marathon-runners-running-a-race-scaled.jpg",
+      "createdAt": "2024-03-10",
+      "totalRegistrationCount": 0
+    }
+  ]
+  

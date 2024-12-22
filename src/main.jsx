@@ -15,6 +15,9 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import AuthProvider from './AuthProvider/AuthProvider';
+import AddMarathon from './Components/Dashboard/AddMarathon';
+import MyMarathons from './Components/Dashboard/MyMarathons';
+import MyApply from './Components/Dashboard/MyApply';
 
 
 const router = createBrowserRouter([
@@ -42,6 +45,18 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login></Login>,
+      },
+      {
+        path: "dashboard/add-marathon",
+        element: <AddMarathon></AddMarathon>
+      },
+      {
+        path: "dashboard/my-marathons",
+        element: <MyMarathons></MyMarathons>,
+      },
+      {
+        path: "dashboard/my-apply-list",
+        element: <MyApply></MyApply>,
       },
     ],
   },

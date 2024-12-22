@@ -34,7 +34,10 @@ const NavBar = () => {
 
             {/* Navbar Center */}
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu font-bold  menu-horizontal px-1">
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
                     <li>
                         <Link to="/marathons">Marathons</Link>
                     </li>
@@ -93,6 +96,12 @@ const NavBar = () => {
                     </button>
                     <ul className="menu p-4 mt-10 space-y-4">
                         <li>
+                            <Link
+                                to="/"
+                                className="bg-orange-100 mb-4 font-bold rounded-none text-[#F96E2A]"
+                            >
+                                Home
+                            </Link>
                             <Link
                                 to="/marathons"
                                 className="bg-orange-100 font-bold rounded-none text-[#F96E2A]"
