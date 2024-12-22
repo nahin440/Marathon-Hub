@@ -1,72 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { FaGoogle } from 'react-icons/fa';
-import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        photoURL: '',
-        password: '',
-    });
-
-    const [errors, setErrors] = useState({});
+    const { createUser, googleSignIn, setUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        AOS.init();
+        // Animations initialization
     }, []);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
-    };
-
-    const validatePassword = (password) => {
-        const errors = {};
-        if (!/[A-Z]/.test(password)) {
-            errors.uppercase = 'Password must include at least one uppercase letter.';
-        }
-        if (!/[a-z]/.test(password)) {
-            errors.lowercase = 'Password must include at least one lowercase letter.';
-        }
-        if (password.length < 6) {
-            errors.length = 'Password must be at least 6 characters long.';
-        }
-        return errors;
-    };
-
-    const handleFormSubmit = (e) => {
+    const handleRegister = (e) => {
         e.preventDefault();
-        const passwordErrors = validatePassword(formData.password);
+        const form = e.target;
 
-        if (Object.keys(passwordErrors).length > 0) {
-            setErrors(passwordErrors);
-            toast.error('Please fix the errors in the form.');
-        } else {
-            setErrors({});
-            toast.success('Registration successful!');
-            // Add Firebase authentication logic here later
+        const name = form.name.value;
+        const email = form.email.value;
+        const photoURL = form.photoURL.value;
+        const password = form.password.value;
+
+        // Password validation
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        if (!passwordRegex.test(password)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Password',
+                text: 'Password must contain at least 6 characters, including uppercase and lowercase.',
+            });
+            return;
         }
+
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                setUser({ ...user, displayName: name, photoURL });
+                Swal.fire('Success', 'Account created successfully!', 'success');
+                navigate('/');
+            })
+            .catch(error => {
+                Swal.fire('Error', error.message, 'error');
+            });
     };
 
     const handleGoogleLogin = () => {
-        toast.success('Google login clicked!');
-        // Add Firebase Google login logic here later
+        googleSignIn()
+            .then(result => {
+                Swal.fire('Success', 'Logged in with Google!', 'success');
+                navigate('/');
+            })
+            .catch(error => {
+                Swal.fire('Error', error.message, 'error');
+            });
     };
+
+
 
     return (
         <div
             className="min-h-screen bg-[#FBF8EF] flex items-center justify-center px-4"
             data-aos="fade-up"
         >
-            <Toaster position="top-center" reverseOrder={false} />
+            {/* <Toaster position="top-center" reverseOrder={false} /> */}
             <motion.div
                 className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
                 initial={{ opacity: 0, y: 50 }}
@@ -76,7 +73,7 @@ const Register = () => {
                 <h2 className="text-2xl font-bold text-center text-[#F96E2A] mb-6">
                     Register
                 </h2>
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handleRegister}>
                     {/* Name */}
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-sm font-medium text-[#F96E2A]">
@@ -86,8 +83,8 @@ const Register = () => {
                             type="text"
                             name="name"
                             id="name"
-                            
                             className="input input-bordered w-full"
+                            placeholder='Name'
                             required
                         />
                     </div>
@@ -101,8 +98,8 @@ const Register = () => {
                             type="email"
                             name="email"
                             id="email"
-                            
                             className="input input-bordered w-full"
+                            placeholder='Email'
                             required
                         />
                     </div>
@@ -116,8 +113,8 @@ const Register = () => {
                             type="url"
                             name="photoURL"
                             id="photoURL"
-                            
                             className="input input-bordered w-full"
+                            placeholder='Photo URL'
                         />
                     </div>
 
@@ -130,15 +127,10 @@ const Register = () => {
                             type="password"
                             name="password"
                             id="password"
-                            
                             className="input input-bordered w-full"
+                            placeholder='Password'
                             required
                         />
-                        <div className="text-sm text-red-500 mt-2">
-                            {errors.uppercase && <p>{errors.uppercase}</p>}
-                            {errors.lowercase && <p>{errors.lowercase}</p>}
-                            {errors.length && <p>{errors.length}</p>}
-                        </div>
                     </div>
 
                     {/* Submit Button */}
@@ -161,6 +153,7 @@ const Register = () => {
                 {/* Google Login */}
                 <div className="divider my-4">OR</div>
                 <button
+                    
                     onClick={handleGoogleLogin}
                     className="btn btn-outline w-full flex items-center justify-center border-[#F96E2A] text-[#F96E2A] hover:bg-[#F96E2A] hover:text-white"
                 >

@@ -14,6 +14,7 @@ import Marathons from './Components/Marathons/Marathons';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
+import AuthProvider from './AuthProvider/AuthProvider';
 
 
 const router = createBrowserRouter([
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <Login></Login> ,
+        element: <Login></Login>,
       },
     ],
   },
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+
   </StrictMode>,
 )
