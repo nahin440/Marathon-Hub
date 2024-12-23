@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"; 
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
@@ -58,8 +58,13 @@ const MyMarathons = () => {
     event.preventDefault();
     const updatedData = {
       marathonTitle: event.target.marathonTitle.value,
+      startRegistrationDate: event.target.startRegistrationDate.value,
+      endRegistrationDate: event.target.endRegistrationDate.value,
+      marathonStartDate: event.target.marathonStartDate.value,
       location: event.target.location.value,
+      runningDistance: event.target.runningDistance.value,
       description: event.target.description.value,
+      marathonImage: event.target.marathonImage.value,
     };
 
     axios
@@ -146,11 +151,63 @@ const MyMarathons = () => {
                 />
               </div>
               <div className="form-control">
+                <label className="label">Start Registration Date</label>
+                <input
+                  type="datetime-local"
+                  name="startRegistrationDate"
+                  defaultValue={
+                    new Date(selectedMarathon.startRegistrationDate)
+                      .toISOString()
+                      .slice(0, 16)
+                  }
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">End Registration Date</label>
+                <input
+                  type="datetime-local"
+                  name="endRegistrationDate"
+                  defaultValue={
+                    new Date(selectedMarathon.endRegistrationDate)
+                      .toISOString()
+                      .slice(0, 16)
+                  }
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">Marathon Start Date</label>
+                <input
+                  type="datetime-local"
+                  name="marathonStartDate"
+                  defaultValue={
+                    new Date(selectedMarathon.marathonStartDate)
+                      .toISOString()
+                      .slice(0, 16)
+                  }
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
                 <label className="label">Location</label>
                 <input
                   type="text"
                   name="location"
                   defaultValue={selectedMarathon.location}
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">Running Distance</label>
+                <input
+                  type="text"
+                  name="runningDistance"
+                  defaultValue={selectedMarathon.runningDistance}
                   className="input input-bordered"
                   required
                 />
@@ -163,6 +220,16 @@ const MyMarathons = () => {
                   className="textarea textarea-bordered"
                   required
                 ></textarea>
+              </div>
+              <div className="form-control">
+                <label className="label">Marathon Image URL</label>
+                <input
+                  type="text"
+                  name="marathonImage"
+                  defaultValue={selectedMarathon.marathonImage}
+                  className="input input-bordered"
+                  required
+                />
               </div>
               <div className="modal-action">
                 <button type="submit" className="btn btn-success">
