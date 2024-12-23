@@ -13,10 +13,12 @@ const Root = () => {
 
             </div>
 
-            <div className='w-11/12 md:w-9/12 mx-auto' >
+            <div className='bg-[#fbf8ef94]' >
+                <div className='w-11/12  md:w-9/12 mx-auto' >
 
-                <Outlet></Outlet>
+                    <Outlet></Outlet>
 
+                </div>
             </div>
 
             <div>

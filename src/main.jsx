@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <Dashboard></Dashboard>,
+        element:  <PrivateRoute > <Dashboard></Dashboard> </PrivateRoute>, 
       },
       {
         path: "marathons",
@@ -51,15 +51,15 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard/add-marathon",
-        element: <AddMarathon></AddMarathon>
+        element: <PrivateRoute> <AddMarathon></AddMarathon> </PrivateRoute>,
       },
       {
         path: "dashboard/my-marathons",
-        element: <MyMarathons></MyMarathons>,
+        element: <PrivateRoute> <MyMarathons></MyMarathons> </PrivateRoute> ,
       },
       {
         path: "dashboard/my-apply-list",
-        element: <MyApply></MyApply>,
+        element: <PrivateRoute> <MyApply></MyApply>  </PrivateRoute>,
       },
       {
         path: "marathons/:id",
