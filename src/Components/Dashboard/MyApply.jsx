@@ -152,6 +152,30 @@ const MyApply = () => {
                         <form onSubmit={handleUpdate}>
                             <div className="mb-4">
                                 <label className="label">
+                                    <span className="label-text">Title</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    defaultValue={selectedRegistration.marathonTitle}
+                                    className="input input-bordered w-full"
+                                    readOnly
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="label">
+                                    <span className="label-text">Marathon start date</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    defaultValue={selectedRegistration.startDate}
+                                    className="input input-bordered w-full"
+                                    readOnly
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="label">
                                     <span className="label-text">First Name</span>
                                 </label>
                                 <input
