@@ -12,10 +12,31 @@ const MyMarathons = () => {
   // Fetch user-specific marathons
   useEffect(() => {
     if (user?.email) {
-      axios
-        .get(`http://localhost:3000/marathons?email=${user.email}`)
-        .then((response) => setMarathons(response.data))
-        .catch((error) => console.error("Error fetching marathons:", error));
+     
+    
+    
+
+
+
+        // axios.get(`http://localhost:3000/marathon-registers?email=${user.email}`, {
+        //     withCredentials: true
+        // })
+        // .then(res => {
+        //     setRegistrations(res.data);
+        //     setFilteredRegistrations(res.data)
+        // })
+
+        // .catch(() => {
+        //             Swal.fire({
+        //                 icon: 'error',
+        //                 title: 'Oops...',
+        //                 text: 'Failed to fetch registrations!',
+        //             });
+        //         });
+
+
+
+
     }
   }, [user]);
 

@@ -2,26 +2,79 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const MyApply = () => {
     const { user } = useContext(AuthContext);
     const [registrations, setRegistrations] = useState([]);
+    const [filteredRegistrations, setFilteredRegistrations] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const [selectedRegistration, setSelectedRegistration] = useState(null);
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/marathon-registers?email=${user.email}`)
-                .then((res) => res.json())
-                .then((data) => setRegistrations(data))
-                .catch(() => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Failed to fetch registrations!',
+
+
+            // fetch(`http://localhost:3000/marathon-registers?email=${user.email}`)
+            //     .then((res) => res.json())
+            //     .then((data) => {
+            //         setRegistrations(data);
+            //         setFilteredRegistrations(data); // Initialize filtered data
+            //     })
+            //     .catch(() => {
+            //         Swal.fire({
+            //             icon: 'error',
+            //             title: 'Oops...',
+            //             text: 'Failed to fetch registrations!',
+            //         });
+            //     });
+
+
+
+
+
+
+
+            axios.get(`http://localhost:3000/marathon-registers?email=${user.email}`, {
+                withCredentials: true
+            })
+            .then(res => {
+                setRegistrations(res.data);
+                setFilteredRegistrations(res.data)
+            })
+
+            .catch(() => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Failed to fetch registrations!',
+                        });
                     });
-                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }, [user?.email]);
+
+    useEffect(() => {
+        // Filter registrations based on the search query
+        const filtered = registrations.filter((registration) =>
+            registration.marathonTitle.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredRegistrations(filtered);
+    }, [searchQuery, registrations]);
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -97,8 +150,19 @@ const MyApply = () => {
     return (
         <div className="container mx-auto p-4">
             <h2 className="text-2xl font-semibold text-center mb-4">
-                My Applied Marathons ({registrations.length})
+                My Applied Marathons ({filteredRegistrations.length})
             </h2>
+
+            {/* Search Bar */}
+            <div className="mb-4">
+                <input
+                    type="text"
+                    placeholder="Search by marathon title"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="input input-bordered w-full"
+                />
+            </div>
 
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
@@ -111,13 +175,13 @@ const MyApply = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {registrations.map((registration, index) => (
+                        {filteredRegistrations.map((registration, index) => (
                             <tr key={registration._id}>
                                 <td>{index + 1}</td>
                                 <td>{registration.marathonTitle}</td>
                                 <td>{registration.startDate}</td>
                                 <td>
-                                    <div className="flex  gap-2">
+                                    <div className="flex gap-2">
                                         <button
                                             className="btn text-white btn-sm bg-orange-600"
                                             onClick={() => setSelectedRegistration(registration)}
@@ -131,9 +195,8 @@ const MyApply = () => {
                                             Delete
                                         </button>
                                         <Link
-                                        to={`/marathons/${registration.marathonRegister_id}`}
-                                            className="btn text-white btn-sm  bg-orange-600"
-                                            
+                                            to={`/marathons/${registration.marathonRegister_id}`}
+                                            className="btn text-white btn-sm bg-orange-600"
                                         >
                                             See Details
                                         </Link>
