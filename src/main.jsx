@@ -21,6 +21,7 @@ import MyApply from './Components/Dashboard/MyApply';
 import MarathonDetailsPage from './Components/MarathonDetailsPage/MarathonDetailsPage';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import RegistrationForm from './Components/RegistrationForm/RegistrationForm';
+import { HelmetProvider } from 'react-helmet-async';
 
 
 const router = createBrowserRouter([
@@ -64,12 +65,12 @@ const router = createBrowserRouter([
       {
         path: "marathons/:id",
         element: <PrivateRoute> <MarathonDetailsPage></MarathonDetailsPage>  </PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:3000/marathons/${params.id}`),
+        loader: ({params}) => fetch(`https://marathon-server.vercel.app/marathons/${params.id}`),
       },
       {
         path: "marathonRegister/:id",
         element: <PrivateRoute> <RegistrationForm></RegistrationForm> </PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:3000/marathons/${params.id}`),
+        loader: ({params}) => fetch(`https://marathon-server.vercel.app/marathons/${params.id}`),
       },
     ],
   },
@@ -77,10 +78,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <HelmetProvider>
 
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
 
+    </HelmetProvider>
   </StrictMode>,
 )

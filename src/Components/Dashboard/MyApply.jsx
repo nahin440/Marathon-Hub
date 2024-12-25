@@ -12,10 +12,13 @@ const MyApply = () => {
     const [selectedRegistration, setSelectedRegistration] = useState(null);
 
     useEffect(() => {
+
+
+
         if (user?.email) {
 
 
-            // fetch(`http://localhost:3000/marathon-registers?email=${user.email}`)
+            // fetch(`https://marathon-server.vercel.app/marathon-registers?email=${user.email}`)
             //     .then((res) => res.json())
             //     .then((data) => {
             //         setRegistrations(data);
@@ -35,21 +38,21 @@ const MyApply = () => {
 
 
 
-            axios.get(`http://localhost:3000/marathon-registers?email=${user.email}`, {
+            axios.get(`https://marathon-server.vercel.app/marathon-registers?email=${user.email}`, {
                 withCredentials: true
             })
-            .then(res => {
-                setRegistrations(res.data);
-                setFilteredRegistrations(res.data)
-            })
+                .then(res => {
+                    setRegistrations(res.data);
+                    setFilteredRegistrations(res.data)
+                })
 
-            .catch(() => {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Failed to fetch registrations!',
-                        });
+                .catch(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Failed to fetch registrations!',
                     });
+                });
 
 
 
@@ -87,7 +90,7 @@ const MyApply = () => {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/marathon-registers/${id}`, {
+                fetch(`https://marathon-server.vercel.app/marathon-registers/${id}`, {
                     method: 'DELETE',
                 })
                     .then((res) => res.json())
@@ -119,7 +122,7 @@ const MyApply = () => {
             additionalInfo: form.additionalInfo.value,
         };
 
-        fetch(`http://localhost:3000/marathon-registers/${selectedRegistration._id}`, {
+        fetch(`https://marathon-server.vercel.app/marathon-registers/${selectedRegistration._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedData),
@@ -149,6 +152,9 @@ const MyApply = () => {
 
     return (
         <div className="container mx-auto p-4">
+            {/* <Helmet>
+                <title>My Applications - MarathonHub</title>
+            </Helmet> */}
             <h2 className="text-2xl font-semibold text-center mb-4">
                 My Applied Marathons ({filteredRegistrations.length})
             </h2>

@@ -6,7 +6,7 @@ const SixMarathon = () => {
   const [marathons, setMarathons] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/limit')
+    fetch('https://marathon-server.vercel.app/limit')
       .then((res) => res.json())
       .then((data) => setMarathons(data))
       .catch((error) => console.error('Error fetching marathons:', error));

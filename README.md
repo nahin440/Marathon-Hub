@@ -1,8 +1,18 @@
-# React + Vite
+# MarathonHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Visit the live website](https://marathon-1d87e.web.app)
 
-Currently, two official plugins are available:
+## Features:
+- **Event Management:** Allows event organizers to add, update, and delete marathon events easily.
+- **User Registration & Authentication:** Secure login/signup with email/password and Google or GitHub authentication.
+- **Marathon Registration:** Users can browse available marathons and apply for events with detailed registration.
+- **Personalized Dashboard:** Users can view and manage their marathon applications and the events they’ve created.
+- **Dynamic Content:** Includes event highlight banners, upcoming marathon sections, and dynamic route titles.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack:
+- React
+- Tailwind CSS
+- Firebase Authentication
+- Node.js/Express (Server-side)
+- JWT Authentication
+- React Router

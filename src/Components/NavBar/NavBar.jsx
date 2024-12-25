@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBars, FaTimes, FaUserCircle } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import logo from '../../assets/marathon-logo.jpg';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { user, logOut, loading } = useContext(AuthContext);
+    const menuRef = useRef();
 
     const handleLogOut = () => {
         logOut()
@@ -17,9 +19,23 @@ const NavBar = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    // Close the menu when clicking outside
+    useEffect(() => {
+        const handleOutsideClick = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setIsMenuOpen(false);
+            }
+        };
+        if (isMenuOpen) {
+            document.addEventListener('mousedown', handleOutsideClick);
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleOutsideClick);
+        };
+    }, [isMenuOpen]);
+
     return (
-        <nav className="navbar bg-[#fff8e4] text-[#F96E2A] shadow-lg">
-            {/* Navbar Start */}
+        <nav className="navbar bg-[#fff8e4] md:px-20 text-[#F96E2A] shadow-lg">
             <div className="navbar-start">
                 <button
                     className="btn btn-ghost md:hidden"
@@ -27,39 +43,37 @@ const NavBar = () => {
                 >
                     {isMenuOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
                 </button>
-                <Link to="/" className="btn btn-ghost normal-case text-xl">
+                <Link to="/" className="btn flex justify-center items-center btn-ghost normal-case text-xl">
                     MarathonHub
+                    <img src={logo} alt="" className="w-10 h-10 rounded-full" />
                 </Link>
             </div>
 
-            {/* Navbar Center */}
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu font-bold  menu-horizontal px-1">
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/marathons">Marathons</Link>
-                    </li>
-                    {user && (
-                        <li>
-                            <Link to="/dashboard">Dashboard</Link>
-                        </li>
-                    )}
+                <ul className="menu font-bold menu-horizontal px-1">
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/marathons">Marathons</Link></li>
+                    {user && <li><Link to="/dashboard">Dashboard</Link></li>}
                 </ul>
             </div>
 
-            {/* Navbar End */}
             <div className="navbar-end flex items-center space-x-4">
                 {loading ? (
                     <span className="loading loading-ring loading-lg"></span>
                 ) : user ? (
                     <div className="flex items-center space-x-4">
-                        <img
-                            src={user.photoURL || 'https://via.placeholder.com/150'}
-                            alt="User Avatar"
-                            className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
-                        />
+                        {user?.photoURL ? (
+                            <img
+                                src={user?.photoURL}
+                                alt="User Avatar"
+                                className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
+                            />
+                        ) : (
+                            <img
+                                src="https://via.placeholder.com/150"
+                                className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
+                            />
+                        )}
                         <button
                             onClick={handleLogOut}
                             className="btn btn-outline hidden md:block border-[#F96E2A] text-[#F96E2A]"
@@ -85,16 +99,21 @@ const NavBar = () => {
                 )}
             </div>
 
-            {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="fixed top-0 left-0 w-3/4 h-full bg-[#FBF8EF] shadow-lg z-50">
+                <div
+                    ref={menuRef}
+                    className="fixed top-0 left-0 w-3/4 h-full bg-[#FBF8EF] shadow-lg z-50"
+                >
                     <button
                         className="absolute top-4 right-4 btn btn-ghost"
                         onClick={toggleMenu}
                     >
                         <FaTimes className="text-2xl text-[#F96E2A]" />
                     </button>
-                    <ul className="menu p-4 mt-10 space-y-4">
+                    <ul
+                        className="menu p-4 mt-10 space-y-4"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
                         <li>
                             <Link
                                 to="/"

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Import the CSS for date picker
+import 'react-datepicker/dist/react-datepicker.css';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,6 @@ const AddMarathon = () => {
 
     const navigate = useNavigate();
 
-    // Use useEffect to update loading state if user is not available
     useEffect(() => {
         if (!user) {
             setLoading(true);
@@ -23,49 +22,58 @@ const AddMarathon = () => {
     if (!user) {
         return (
             <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-              <div className="w-20 h-20 border-8 border-t-8 border-gray-200 border-t-[#F96E2A] rounded-full animate-spin"></div>
-              <p className="mt-4 text-xl font-bold text-[#F96E2A]">Loading...</p>
+                <div className="w-20 h-20 border-8 border-t-8 border-gray-200 border-t-[#F96E2A] rounded-full animate-spin"></div>
+                <p className="mt-4 text-xl font-bold text-[#F96E2A]">Loading...</p>
             </div>
-          );
+        );
     }
 
     const { email, displayName } = user;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
 
+        // Format dates as ISO 8601 strings
+        const formattedStartRegistrationDate = startRegistrationDate?.toISOString().split('T')[0];
+        const formattedEndRegistrationDate = endRegistrationDate?.toISOString().split('T')[0];
+        const formattedMarathonStartDate = marathonStartDate?.toISOString().split('T')[0];
+
         const marathonData = {
             marathonTitle: form.title.value,
-            startRegistrationDate,
-            endRegistrationDate,
-            marathonStartDate,
+            startRegistrationDate: formattedStartRegistrationDate,
+            endRegistrationDate: formattedEndRegistrationDate,
+            marathonStartDate: formattedMarathonStartDate,
             location: form.location.value,
             runningDistance: form.runningDistance.value,
             description: form.description.value,
             marathonImage: form.marathonImage.value,
-            createdAt: new Date(),
+            createdAt: new Date().toISOString(),
             totalRegistrationCount: 0,
             email,
             displayName,
         };
 
-        fetch('http://localhost:3000/marathons', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(marathonData),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.insertedId) {
-                    Swal.fire('Added!', 'Your Marathon Event has been added.', 'success');
-                    navigate('/dashboard/my-marathons');
-                }
+        try {
+            const response = await fetch('https://marathon-server.vercel.app/marathons', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(marathonData),
             });
+            const data = await response.json();
 
-        console.log(marathonData);
+            if (data.insertedId) {
+                Swal.fire('Added!', 'Your Marathon Event has been added.', 'success');
+                navigate('/dashboard/my-marathons');
+            } else {
+                Swal.fire('Error!', 'Something went wrong. Please try again.', 'error');
+            }
+        } catch (error) {
+            console.error('Error adding marathon:', error);
+            Swal.fire('Error!', 'Something went wrong. Please try again.', 'error');
+        }
     };
 
     return (
@@ -79,7 +87,6 @@ const AddMarathon = () => {
                     </label>
                     <input
                         type="text"
-                        id="title"
                         name="title"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                         required
@@ -91,7 +98,7 @@ const AddMarathon = () => {
                     <div className="space-y-2">
                         <label className="block font-semibold text-gray-700">Start Registration Date</label>
                         <DatePicker
-                            selected={startRegistrationDate || null}
+                            selected={startRegistrationDate}
                             onChange={(date) => setStartRegistrationDate(date)}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                             dateFormat="yyyy-MM-dd"
@@ -101,7 +108,7 @@ const AddMarathon = () => {
                     <div className="space-y-2">
                         <label className="block font-semibold text-gray-700">End Registration Date</label>
                         <DatePicker
-                            selected={endRegistrationDate || null}
+                            selected={endRegistrationDate}
                             onChange={(date) => setEndRegistrationDate(date)}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                             dateFormat="yyyy-MM-dd"
@@ -111,7 +118,7 @@ const AddMarathon = () => {
                     <div className="space-y-2">
                         <label className="block font-semibold text-gray-700">Marathon Start Date</label>
                         <DatePicker
-                            selected={marathonStartDate || null}
+                            selected={marathonStartDate}
                             onChange={(date) => setMarathonStartDate(date)}
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                             dateFormat="yyyy-MM-dd"
@@ -126,7 +133,6 @@ const AddMarathon = () => {
                     </label>
                     <input
                         type="text"
-                        id="location"
                         name="location"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                         required
@@ -139,7 +145,6 @@ const AddMarathon = () => {
                         Running Distance
                     </label>
                     <select
-                        id="runningDistance"
                         name="runningDistance"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                         required
@@ -158,7 +163,6 @@ const AddMarathon = () => {
                     </label>
                     <input
                         type="text"
-                        id="marathonImage"
                         name="marathonImage"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                         required
@@ -171,7 +175,6 @@ const AddMarathon = () => {
                         Description
                     </label>
                     <textarea
-                        id="description"
                         name="description"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                         rows="4"
@@ -179,14 +182,13 @@ const AddMarathon = () => {
                     ></textarea>
                 </div>
 
-                {/* Marathon owner */}
+                {/* Marathon Owner */}
                 <div className="space-y-2">
                     <label htmlFor="name" className="block font-semibold text-gray-700">
                         Event Owner
                     </label>
                     <input
                         type="text"
-                        id="name"
                         name="name"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                         readOnly
@@ -200,7 +202,6 @@ const AddMarathon = () => {
                     </label>
                     <input
                         type="email"
-                        id="email"
                         name="email"
                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F96E2A]"
                         readOnly

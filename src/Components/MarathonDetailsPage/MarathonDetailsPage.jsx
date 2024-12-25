@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { toast } from "react-toastify";
 
 const MarathonDetailsPage = () => {
     const marathon = useLoaderData(); // Load marathon data dynamically
@@ -50,7 +51,7 @@ const MarathonDetailsPage = () => {
                         strokeWidth={10}
                         trailColor="#d3f4f6"
                         size={220}
-                        onComplete={() => console.log("Marathon started!")}
+                        onComplete={() => toast.success('marathon added')}
                     >
                         {({ remainingTime }) => {
                             const days = Math.floor(remainingTime / (3600 * 24));

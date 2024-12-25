@@ -13,7 +13,7 @@ const MyMarathons = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/marathons?email=${user.email}`,{
+        .get(`https://marathon-server.vercel.app/marathons?email=${user.email}`,{
             withCredentials: true
         })
         .then((response) => setMarathons(response.data))
@@ -29,7 +29,7 @@ const MyMarathons = () => {
 
 
 
-        // axios.get(`http://localhost:3000/marathon-registers?email=${user.email}`, {
+        // axios.get(`https://marathon-server.vercel.app/marathon-registers?email=${user.email}`, {
         //     withCredentials: true
         // })
         // .then(res => {
@@ -64,7 +64,7 @@ const MyMarathons = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/marathons/${id}`)
+          .delete(`https://marathon-server.vercel.app/marathons/${id}`)
           .then(() => {
             Swal.fire("Deleted!", "Your marathon has been deleted.", "success");
             setMarathons((prev) =>
@@ -100,7 +100,7 @@ const MyMarathons = () => {
     };
 
     axios
-      .put(`http://localhost:3000/marathons/${selectedMarathon._id}`, updatedData)
+      .put(`https://marathon-server.vercel.app/marathons/${selectedMarathon._id}`, updatedData)
       .then(() => {
         Swal.fire("Updated!", "Your marathon has been updated.", "success");
         setMarathons((prev) =>

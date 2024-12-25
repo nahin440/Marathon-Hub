@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FcGoogle } from "react-icons/fc";
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
   const { loginUser, googleSignIn } = useContext(AuthContext);
@@ -57,6 +58,9 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-[#FBF8EF] flex items-center justify-center">
+      <Helmet>
+        <title>Login - MarathonHub</title>
+      </Helmet>
       <motion.div
         className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
         initial={{ opacity: 0, y: 50 }}

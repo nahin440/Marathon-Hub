@@ -1,165 +1,165 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import Swal from 'sweetalert2';
+import AOS from 'aos'; // Animate on Scroll
+import 'aos/dist/aos.css';
+
+import { toast } from 'react-toastify'; // For toasts
+import 'react-toastify/dist/ReactToastify.css';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../../Firebase/firebase.init';
+import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
-import { FaGoogle } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
-    const { createUser, googleSignIn, setUser } = useContext(AuthContext);
+    const { createUser, setUser } = useContext(AuthContext);
+    const [errors, setErrors] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Animations initialization
+        AOS.init({ duration: 1000 });
     }, []);
 
     const handleRegister = (e) => {
         e.preventDefault();
         const form = e.target;
-
         const name = form.name.value;
         const email = form.email.value;
         const photoURL = form.photoURL.value;
         const password = form.password.value;
 
         // Password validation
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-        if (!passwordRegex.test(password)) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid Password',
-                text: 'Password must contain at least 6 characters, including uppercase and lowercase.',
-            });
+        if (!/[A-Z]/.test(password)) {
+            setErrors('Password must have at least one uppercase letter.');
             return;
         }
+        if (!/[a-z]/.test(password)) {
+            setErrors('Password must have at least one lowercase letter.');
+            return;
+        }
+        if (password.length < 6) {
+            setErrors('Password must be at least 6 characters long.');
+            return;
+        }
+        setErrors(''); // Clear errors if validation passes
 
         createUser(email, password)
-            .then(result => {
+            .then((result) => {
                 const user = result.user;
-                setUser({ ...user, displayName: name, photoURL });
-                Swal.fire('Success', 'Account created successfully!', 'success');
-                navigate('/');
+                setUser({ ...user, displayName: name, photoURL }); // Set user with additional details
+                toast.success('Registration successful! 🎉', {
+                    position: 'top-center',
+                    autoClose: 2000, // Auto close after 2 seconds
+                });
+                navigate('/'); // Redirect to home
             })
-            .catch(error => {
-                Swal.fire('Error', error.message, 'error');
+            .catch((error) => {
+                toast.error(`Error: ${error.code}`, {
+                    position: 'top-center',
+                    autoClose: 2000, // Auto close after 2 seconds
+                });
             });
     };
 
-    const handleGoogleLogin = () => {
-        googleSignIn()
-            .then(result => {
-                Swal.fire('Success', 'Logged in with Google!', 'success');
+    const handleGoogleSignup = () => {
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                setUser(user);
+                toast.success('Google Sign-Up successful! 🎉', {
+                    position: 'top-center',
+                    autoClose: 2000, // Auto close after 2 seconds
+                });
                 navigate('/');
             })
-            .catch(error => {
-                Swal.fire('Error', error.message, 'error');
+            .catch((error) => {
+                toast.error(`Error: ${error.code}`, {
+                    position: 'top-center',
+                    autoClose: 2000, // Auto close after 2 seconds
+                });
             });
     };
-
-
 
     return (
-        <div
-            className="min-h-screen bg-[#FBF8EF] flex items-center justify-center px-4"
-            data-aos="fade-up"
-        >
-            {/* <Toaster position="top-center" reverseOrder={false} /> */}
-            <motion.div
-                className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+        <div className="border min-h-screen flex items-center justify-center bg-gradient-to-b from-white via-[#f0f4f7] to-[#ffe1b3]">
+            <Helmet>
+                <title>Register - MarathonHub</title>
+            </Helmet>
+            <div
+                className="bg-white w-11/12 md:w-[500px] mx-auto rounded-xl border-2 border-[#ff9800] shadow-2xl my-16 py-14 px-6"
+                data-aos="zoom-in"
             >
-                <h2 className="text-2xl font-bold text-center text-[#F96E2A] mb-6">
+                <h2 className="text-4xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#ff9800] via-[#ffa726] to-[#fb8c00]">
                     Register
                 </h2>
-                <form onSubmit={handleRegister}>
-                    {/* Name */}
+                <form className="w-full max-w-md" onSubmit={handleRegister} data-aos="zoom-in">
                     <div className="mb-4">
-                        <label htmlFor="name" className="block text-sm font-medium text-[#F96E2A]">
-                            Name
-                        </label>
+                        <label className="block text-sm font-medium mb-2">Name</label>
                         <input
                             type="text"
                             name="name"
-                            id="name"
-                            className="input input-bordered w-full"
-                            placeholder='Name'
+                            className="w-full bg-white px-4 py-2 border rounded focus:outline-none"
+                            placeholder="Enter your name"
                             required
                         />
                     </div>
-
-                    {/* Email */}
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-sm font-medium text-[#F96E2A]">
-                            Email
-                        </label>
+                        <label className="block text-sm font-medium mb-2">Email</label>
                         <input
                             type="email"
                             name="email"
-                            id="email"
-                            className="input input-bordered w-full"
-                            placeholder='Email'
+                            className="w-full bg-white px-4 py-2 border rounded focus:outline-none"
+                            placeholder="Enter your email"
                             required
                         />
                     </div>
-
-                    {/* Photo URL */}
                     <div className="mb-4">
-                        <label htmlFor="photoURL" className="block text-sm font-medium text-[#F96E2A]">
-                            Photo URL
-                        </label>
+                        <label className="block text-sm font-medium mb-2">Photo URL</label>
                         <input
                             type="url"
                             name="photoURL"
-                            id="photoURL"
-                            className="input input-bordered w-full"
-                            placeholder='Photo URL'
-                        />
-                    </div>
-
-                    {/* Password */}
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block text-sm font-medium text-[#F96E2A]">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="input input-bordered w-full"
-                            placeholder='Password'
+                            className="w-full bg-white px-4 py-2 border rounded focus:outline-none"
+                            placeholder="Enter your photo URL"
                             required
                         />
                     </div>
-
-                    {/* Submit Button */}
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium mb-2">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            className="w-full bg-white px-4 py-2 border rounded focus:outline-none"
+                            placeholder="Enter your password"
+                            required
+                        />
+                    </div>
+                    {errors && <p className="text-red-500 text-sm mb-4">{errors}</p>}
                     <button
                         type="submit"
-                        className="btn w-full bg-[#F96E2A] text-white border-none hover:bg-orange-600"
+                        className="w-full py-2 px-4 rounded text-white bg-[#ff9800] hover:opacity-90"
                     >
                         Register
                     </button>
                 </form>
-
-                {/* Redirect to Login */}
-                <p className="text-center mt-4 text-sm">
+                <div className="my-4" data-aos="zoom-in">
+                    <button
+                        onClick={handleGoogleSignup}
+                        className="w-full py-2 px-4 flex items-center justify-center rounded text-white bg-[#ff9800] hover:opacity-90 gap-2"
+                    >
+                        Register with Google
+                        <div className="p-1 rounded-full bg-white border-2 border-white">
+                            <FcGoogle size={20} />
+                        </div>
+                    </button>
+                </div>
+                <p className="mt-4 text-center">
                     Already have an account?{' '}
-                    <Link to="/login" className="text-[#F96E2A] hover:underline">
+                    <Link to="/login" className="text-[#ff9800] hover:underline">
                         Login here
                     </Link>
                 </p>
-
-                {/* Google Login */}
-                <div className="divider my-4">OR</div>
-                <button
-                    
-                    onClick={handleGoogleLogin}
-                    className="btn btn-outline w-full flex items-center justify-center border-[#F96E2A] text-[#F96E2A] hover:bg-[#F96E2A] hover:text-white"
-                >
-                    <FaGoogle className="mr-2" /> Continue with Google
-                </button>
-            </motion.div>
+            </div>
         </div>
     );
 };
