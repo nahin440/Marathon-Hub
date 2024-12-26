@@ -31,7 +31,7 @@ const Marathons = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#FBF8EF] px-4 py-8">
+        <div className="min-h-screen  w-11/12 md:w-10/12 mx-auto  bg-[#FBF8EF] px-4 py-8">
             <Helmet>
                 <title>Marathons - MarathonHub</title>
             </Helmet>

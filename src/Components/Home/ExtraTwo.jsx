@@ -51,7 +51,7 @@ const ExtraTwo = () => {
   }, [hasStartedCounting]);
 
   return (
-    <div>
+    <div className="w-11/12 md:w-10/12 mx-auto " >
       {/* Marathon Stats Section */}
       <section className="py-16 bg-gradient-to-r from-orange-100 to-orange-50">
         <div className="container mx-auto text-center text-orange-800">

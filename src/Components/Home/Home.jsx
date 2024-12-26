@@ -4,6 +4,7 @@ import SixMarathon from './SixMarathon';
 import UpcomingMarathons from './UpcomingMarthons';
 import { Helmet } from 'react-helmet-async';
 import ExtraTwo from './ExtraTwo';
+import ChartSection from './ChartSection';
 
 const Home = () => {
     return (
@@ -22,6 +23,10 @@ const Home = () => {
 
             <div>
                 <UpcomingMarathons></UpcomingMarathons>
+            </div>
+
+            <div>
+                <ChartSection></ChartSection>
             </div>
 
             <div>
