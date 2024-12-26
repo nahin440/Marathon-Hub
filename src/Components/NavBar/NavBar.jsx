@@ -111,13 +111,13 @@ const NavBar = () => {
                         <FaTimes className="text-2xl text-[#F96E2A]" />
                     </button>
                     <ul
-                        className="menu p-4 mt-10 space-y-4"
+                        className="menu p-4 -mt-44  space-y-4"
                         onClick={() => setIsMenuOpen(false)}
                     >
                         <li>
                             <Link
                                 to="/"
-                                className="bg-orange-100 mb-4 font-bold rounded-none text-[#F96E2A]"
+                                className="bg-orange-100 mb-4 font-bold  rounded-none text-[#F96E2A]"
                             >
                                 Home
                             </Link>

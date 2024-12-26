@@ -28,7 +28,7 @@ const Banner = () => {
                         <img
                             src={img1}
                             alt="Marathon Banner 1"
-                            className="w-full h-full object-cover"
+                            className="w-full h-[400px] md:h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-60 px-4 flex flex-col justify-center items-center text-[#fff8e4]">
                             <h2 className="text-3xl md:text-5xl font-bold mb-2">
@@ -70,7 +70,7 @@ const Banner = () => {
                         <img
                             src={img2}
                             alt="Marathon Banner 2"
-                            className="w-full h-full object-cover"
+                            className="w-full h-[400px] md:h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-60 px-4 flex flex-col justify-center items-center text-[#fff8e4]">
                             <h2 className="text-3xl md:text-5xl font-bold mb-2">
@@ -112,7 +112,7 @@ const Banner = () => {
                         <img
                             src={img3}
                             alt="Marathon Banner 3"
-                            className="w-full h-full object-cover"
+                            className="w-full h-[400px] md:h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-60 px-4 flex flex-col justify-center items-center text-[#fff8e4]">
                             <h2 className="text-3xl md:text-5xl font-bold mb-2">
