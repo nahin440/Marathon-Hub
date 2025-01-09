@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // //(user)
+    // console.log(user)
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
 
                 axios.post('https://marathon-server.vercel.app/jwt', user, { withCredentials: true })
                     .then(res => {
-                        //(res.data)
+                        console.log(res.data)
                         setLoading(false)
                     })
             }
@@ -58,7 +58,7 @@ const AuthProvider = ({ children }) => {
                     withCredentials: true
                 })
                     .then(res => {
-                        // //('logout', res.data)
+                        // console.log('logout', res.data)
                         setLoading(false)   
 
                     })

@@ -35,7 +35,7 @@ const NavBar = () => {
     }, [isMenuOpen]);
 
     return (
-        <nav className="navbar bg-[#fff8e4] md:px-20 text-[#F96E2A] shadow-lg">
+        <nav className="navbar bg-[#fff4e5e9]/80 fixed top-0 left-0 right-0 z-50  md:px-20 text-[#F96E2A]  shadow-lg">
             <div className="navbar-start">
                 <button
                     className="btn btn-ghost md:hidden"

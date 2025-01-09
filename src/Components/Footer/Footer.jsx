@@ -1,10 +1,11 @@
 import React from 'react';
 import logo from '../../assets/marathon-logo.jpg'
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
         <div>
-            <footer className="footer bg-orange-200/20 text-base-content p-10">
+            <footer className="footer bg-[#ffdfb3e9] text-base-content p-10">
                 {/* Logo and Description */}
                 <aside className="flex flex-col items-start">
                     <img className='w-16 h-16 rounded-full'  src={logo} alt="" />
@@ -18,10 +19,8 @@ const Footer = () => {
                 {/* Useful Links */}
                 <nav>
                     <h6 className="footer-title">Useful Links</h6>
-                    <a className="link link-hover" href="#about-us">About Us</a>
-                    <a className="link link-hover" href="#services">Services</a>
-                    <a className="link link-hover" href="#contact">Contact</a>
-                    <a className="link link-hover" href="#privacy-policy">Privacy Policy</a>
+                    <Link  className="link link-hover"to="/dashboard">Dashboard</Link>
+                    <Link  className="link link-hover" to="/marathons"  >Marathon</Link>
                 </nav>
 
                 {/* Copyright Information */}

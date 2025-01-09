@@ -18,7 +18,7 @@ const Root = () => {
 
             </div>
 
-            <div className='bg-[#fbf8ef94]' >
+            <div className='bg-[#fbf8ef94] mt-[70px]' >
                 <div className='' >
 
                     <Outlet></Outlet>

@@ -44,7 +44,7 @@ const RegistrationForm = () => {
         })
             .then(res => res.json())
             .then(data => {
-                //(data)
+                console.log(data)
                 if (data.insertedId) {
                     Swal.fire({
                         position: "top-center",
@@ -58,7 +58,7 @@ const RegistrationForm = () => {
                 }
             })
             .catch(error => {
-                //(error)
+                console.log(error)
             })
 
 

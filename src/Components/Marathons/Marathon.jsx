@@ -14,7 +14,7 @@ const Marathon = ({ marathon }) => {
         endRegistrationDate,
         marathonImage,
     } = marathon;
-    // //(_id)
+    // console.log(_id)
 
     const navigate = useNavigate();
 
