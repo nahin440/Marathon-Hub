@@ -118,7 +118,7 @@ const NavBar = () => {
                         <FaTimes className="text-2xl text-[#F96E2A]" />
                     </button>
                     <ul
-                        className="menu p-4 -mt-44  space-y-4"
+                        className="menu p-4 -mt-20  space-y-4"
                         onClick={() => setIsMenuOpen(false)}
                     >
                         <li>
@@ -137,11 +137,11 @@ const NavBar = () => {
                         </li>
                         {user ? (
                             <>
-                                <ul className='navbar-center hidden lg:flex' >
-                                    <li><Link to="/dashboard">Dashboard</Link></li>
-                                    <li><Link to="/dashboard/my-apply-list">My Applies</Link></li>
-                                    <li><Link to="/dashboard/my-marathons">My Marathons</Link></li>
-                                </ul>
+
+                                <li><Link className="bg-orange-100 font-bold rounded-none text-[#F96E2A]" to="/dashboard">Dashboard</Link></li>
+                                <li><Link className="bg-orange-100 font-bold rounded-none text-[#F96E2A]" to="/dashboard/my-apply-list">My Applies</Link></li>
+                                <li><Link className="bg-orange-100 font-bold rounded-none text-[#F96E2A]" to="/dashboard/my-marathons">My Marathons</Link></li>
+
                                 <li>
                                     <button
                                         onClick={handleLogOut}
