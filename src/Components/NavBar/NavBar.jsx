@@ -55,7 +55,11 @@ const NavBar = () => {
                 <ul className="menu font-bold menu-horizontal px-1">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/marathons">Marathons</Link></li>
-                    {user && <li><Link to="/dashboard">Dashboard</Link></li>}
+                    {user && <ul className='navbar-center hidden lg:flex' >
+                        <li><Link to="/dashboard">Dashboard</Link></li>
+                        <li><Link to="/dashboard/my-apply-list">My Applies</Link></li>
+                        <li><Link to="/dashboard/my-marathons">My Marathons</Link></li>
+                    </ul>}
                 </ul>
             </div>
 
@@ -133,14 +137,11 @@ const NavBar = () => {
                         </li>
                         {user ? (
                             <>
-                                <li>
-                                    <Link
-                                        to="/dashboard"
-                                        className="bg-orange-100 font-bold rounded-none text-[#F96E2A]"
-                                    >
-                                        Dashboard
-                                    </Link>
-                                </li>
+                                <ul className='navbar-center hidden lg:flex' >
+                                    <li><Link to="/dashboard">Dashboard</Link></li>
+                                    <li><Link to="/dashboard/my-apply-list">My Applies</Link></li>
+                                    <li><Link to="/dashboard/my-marathons">My Marathons</Link></li>
+                                </ul>
                                 <li>
                                     <button
                                         onClick={handleLogOut}
