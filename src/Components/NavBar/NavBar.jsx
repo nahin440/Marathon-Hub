@@ -88,13 +88,13 @@ const NavBar = () => {
                     <div className="hidden md:flex space-x-4">
                         <Link
                             to="/login"
-                            className="btn btn-outline border-[#F96E2A] text-[#F96E2A]"
+                            className="btn btn-outline border-[#F96E2A] text-[#F96E2A] hover:bg-orange-400 hover:text-white "
                         >
                             Login
                         </Link>
                         <Link
                             to="/register"
-                            className="btn bg-[#F96E2A] text-white border-none"
+                            className="btn btn-outline border-[#F96E2A] text-[#F96E2A] hover:bg-orange-400 hover:text-white "
                         >
                             Register
                         </Link>
