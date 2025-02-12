@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import logo from '../../assets/marathon-logo.jpg';
+import { div } from 'framer-motion/client';
 
 const NavBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,26 +68,28 @@ const NavBar = () => {
                 {loading ? (
                     <span className="loading loading-ring loading-lg"></span>
                 ) : user ? (
-                    <div className="flex items-center space-x-4">
-                        {user === null ? (
+                    <div className=' hidden md:block ' >
+                        <div className="flex items-center space-x-4">
+                            {user === null ? (
 
-                            <img
-                                src="https://via.placeholder.com/150"
-                                className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
-                            />
-                        ) : (
-                            <img
-                                src={user?.photoURL}
-                                alt="User Avatar"
-                                className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
-                            />
-                        )}
-                        <button
-                            onClick={handleLogOut}
-                            className="btn btn-outline hidden md:block border-[#F96E2A] text-[#F96E2A]"
-                        >
-                            Logout
-                        </button>
+                                <img
+                                    src="https://via.placeholder.com/150"
+                                    className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
+                                />
+                            ) : (
+                                <img
+                                    src={user?.photoURL}
+                                    alt="User Avatar"
+                                    className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
+                                />
+                            )}
+                            <button
+                                onClick={handleLogOut}
+                                className="btn btn-outline hidden md:block border-[#F96E2A] text-[#F96E2A]"
+                            >
+                                Logout
+                            </button>
+                        </div>
                     </div>
                 ) : (
                     <div className="hidden md:flex space-x-4">
