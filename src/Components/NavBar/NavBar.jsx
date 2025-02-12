@@ -18,6 +18,8 @@ const NavBar = () => {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+    console.log(user)
+
 
     // Close the menu when clicking outside
     useEffect(() => {
@@ -62,15 +64,16 @@ const NavBar = () => {
                     <span className="loading loading-ring loading-lg"></span>
                 ) : user ? (
                     <div className="flex items-center space-x-4">
-                        {user?.photoURL ? (
+                        {user === null ? (
+
                             <img
-                                src={user?.photoURL}
-                                alt="User Avatar"
+                                src="https://via.placeholder.com/150"
                                 className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
                             />
                         ) : (
                             <img
-                                src="https://via.placeholder.com/150"
+                                src={user?.photoURL}
+                                alt="User Avatar"
                                 className="w-10 h-10 rounded-full border-2 mr-10 md:mr-4 border-[#F96E2A]"
                             />
                         )}
